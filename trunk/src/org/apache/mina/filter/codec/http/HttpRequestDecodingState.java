@@ -85,14 +85,14 @@ abstract class HttpRequestDecodingState extends DecodingStateMachine {
         @Override
         protected DecodingState finishDecode(List<Object> childProducts, ProtocolDecoderOutput out) throws Exception {
         	if (childProducts.size()<=1) {// 20090720 DONE ´¦ÀícloseÊ±ºòIndexOutOfBoundsException´íÎó¡££¨HttpRequestDecodingState.java:88£©
-	            URI requestUri = (URI) childProducts.get(1);//java.lang.IndexOutOfBoundsException: Index: 1, Size: 0
+        		return null;
+        	}else {
+        		URI requestUri = (URI) childProducts.get(1);//java.lang.IndexOutOfBoundsException: Index: 1, Size: 0
 	            request.setMethod((HttpMethod) childProducts.get(0));
 	            request.setRequestUri(requestUri);
 	            request.setProtocolVersion((HttpVersion) childProducts.get(2));
 	            request.setParameters(requestUri.getRawQuery());
 	            return READ_HEADERS;
-        	}else {
-        		return null;
         	}
         }
 //      0720.152311.477 [pool-1-thread-2 ] DEBUG L:166 DecodingStateMachine - Ignoring the exception caused by a closed session.
