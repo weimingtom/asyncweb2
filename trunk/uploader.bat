@@ -7,7 +7,10 @@ set DIR=src\org\apache\mina\filter\codec\http
 @REM	svn co https://asyncweb2.googlecode.com/svn/trunk/ asyncweb2 --username Nike.Lius@gmail.com
 @REM	svn commit 
 
-@	copy %SRC%\%DIR%\*.* %DST%\%DIR%\
+@	copy %SRC%\src\org\apache\mina\filter\codec\http\*.*	%DST%\src\org\apache\mina\filter\codec\http
+@	copy %SRC%\src\com\bs3\nio\mina2\codec\HttpCodec*.*	%DST%\src\com\bs3\nio\mina2\codec\
+@	copy %SRC%\src\com\bs3\nio\mina2\codec\http\*.*		%DST%\src\com\bs3\nio\mina2\codec\http\
+
 @REM	cd asyncweb2 
 
 @echo   "首次提交"

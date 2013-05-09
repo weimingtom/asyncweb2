@@ -134,6 +134,12 @@ abstract class HttpResponseDecodingState extends DecodingStateMachine {
         @SuppressWarnings("unchecked")
         protected DecodingState finishDecode(List<Object> childProducts,
                 ProtocolDecoderOutput out) throws Exception {
+        	
+        	{// yinshu 2013.4.26 修改福建http报文头和报文体中间的2个回车换行符变成了1个的问题
+            	if (childProducts.size() == 0){
+            		return null;
+            	}
+        	}        	
             Map<String, List<String>> headers = (Map<String, List<String>>) childProducts
                     .get(0);
             if (parseCookies) {

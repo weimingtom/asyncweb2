@@ -19,48 +19,43 @@ import com.bs3.utils.MyLog;
 public class HttpCodecFactory2 implements ProtocolCodecFactory {
 	private static final MyLog _log = MyLog.getLog(HttpCodecFactory2.class);
     //----------
-	public HttpCodecFactory2() {}
-    //----------
-	protected void setAttr(IoSession session, Class<?> type, Object value) {
-        session.setAttribute(ProtocolEncoder.class, value);
-        _log.debug("# setAttr(%s).attr(%s) = %s", IMina2.getSessionId(session), type.getSimpleName(), value);
-	}
 	protected Object getAttr(IoSession session, Class<?> type) {
-		Object value = session.getAttribute(ProtocolEncoder.class);
-		if (value!=null) {
-		_log.debug("# getAttr(%s).attr(%s) = %s", IMina2.getSessionId(session), type.getSimpleName(), value);
+		Object value = session.getAttribute(type);
+		if(value==null) {
+			if(ProtocolDecoder.class.equals(type)) 		value = this.newDecoder(session);
+			else if(ProtocolEncoder.class.equals(type))	value = this.newEncoder(session);
+			else 			_log.warn("E getAttr(%s).attr(%s).type unknown", IMina2.getSessionId(session), type.getSimpleName());
+			if(value!=null)	this.setAttr(session, type, value);//缓存起来，确保每个IoSession只有唯一attr实例
+			if(value==null)	_log.warn("E getAttr(%s).attr(%s).new = null", IMina2.getSessionId(session), type.getSimpleName());
 		}
 		return value;
 	}
-   //----------
+	private void setAttr(IoSession session, Class<?> type, Object value) {
+        session.setAttribute(type, value);
+        _log.debug("# setAttr(%s).attr(%s) = %s", IMina2.getSessionId(session), type.getSimpleName(), value);
+	}
+	//----------
+	//优先从缓存中获取，确保一个IoSession使用同一个ProtocolEncoder对象。
     public ProtocolEncoder getEncoder(IoSession session) throws Exception {
-    	Class<?> keyClz = ProtocolEncoder.class;
-    	//优先从缓存中获取，确保一个IoSession使用同一个ProtocolEncoder对象。
-    	Object cached = this.getAttr(session, keyClz);
-    	if (cached!=null)	return (ProtocolEncoder)cached;
-    	//创建新的Encoder并缓存。
-    	ProtocolEncoder encoder = null;
-        if (session.getService() instanceof IoAcceptor) {
-        	encoder = new HttpResponseEncoder();
-        } else {
-        	encoder = new HttpRequestEncoder();
-        }
-        this.setAttr(session, keyClz, encoder);
-        return encoder;
+    	Object inst = this.getAttr(session, ProtocolEncoder.class);//自动调用newEncoder()创建
+    	return (ProtocolEncoder)inst;
     }
     public ProtocolDecoder getDecoder(IoSession session) throws Exception {
-    	//优先从缓存中获取，确保一个IoSession使用同一个ProtocolEncoder对象。
-    	Class<?> keyClz = ProtocolDecoder.class;
-    	Object cached = this.getAttr(session, keyClz);
-    	if (cached!=null)	return (ProtocolDecoder)cached;
-    	//创建新的Encoder并缓存。
-    	ProtocolDecoder decoder = null;
-       if (session.getService() instanceof IoAcceptor) {
-    	   decoder = new HttpRequestDecoder();
+    	Object inst = this.getAttr(session, ProtocolDecoder.class);//自动调用newDecoder()创建
+    	return (ProtocolDecoder)inst;
+    }
+    protected ProtocolEncoder newEncoder(IoSession session) {
+        if (session.getService() instanceof IoAcceptor) {
+        	return new HttpResponseEncoder();
         } else {
-        	decoder = new HttpResponseDecoder();
+        	return new HttpRequestEncoder();
         }
-       this.setAttr(session, keyClz, decoder);
-       return decoder;
+    }
+    protected ProtocolDecoder newDecoder(IoSession session) {
+    	if (session.getService() instanceof IoAcceptor) {
+     		return new HttpRequestDecoder();
+    	} else {
+    		return new HttpResponseDecoder();
+    	}
     }
 }
