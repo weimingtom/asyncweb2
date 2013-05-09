@@ -50,7 +50,7 @@ import com.bs3.utils.MyLog;
  * @version $Rev$, $Date$
  */
 abstract class HttpResponseDecodingState extends DecodingStateMachine {
-	private final static MyLog LOG = MyLog.getLog(HttpResponseDecodingState.class);
+	private static final MyLog LOG = MyLog.getLog(HttpResponseDecodingState.class);
     private static final String HEADER_COOKIE = "Cookie";
     /**
      * The header which provides a requests transfer coding
