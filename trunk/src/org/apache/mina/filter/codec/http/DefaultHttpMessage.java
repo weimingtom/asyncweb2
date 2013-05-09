@@ -158,16 +158,12 @@ public class DefaultHttpMessage implements MutableHttpMessage {
     public IoBuffer getContent() {
         return content;
     }
-
     public void setContent(IoBuffer content) {
         if (content == null) {
             throw new NullPointerException("content");
-        }
-        
+        }        
         this.content = content;
     }
-
-
     public void addCookie(Cookie cookie) {
         cookies.add(cookie);
     }

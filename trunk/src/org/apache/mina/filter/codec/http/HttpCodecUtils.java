@@ -38,7 +38,7 @@ import com.bs3.utils.MyLog;
  */
 class HttpCodecUtils {
 	//private static final Logger LOG = LoggerFactory.getLogger(HttpCodecUtils.class);
-	private final static MyLog LOG = MyLog.getLog(HttpCodecUtils.class);
+	private static final MyLog LOG = MyLog.getLog(HttpCodecUtils.class);
     static final String DEFAULT_CHARSET_NAME = "UTF-8";
     static final Charset DEFAULT_CHARSET = Charset.forName(DEFAULT_CHARSET_NAME);
     static final String US_ASCII_CHARSET_NAME = "US-ASCII";

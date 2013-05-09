@@ -51,7 +51,7 @@ import com.bs3.utils.MyLog;
  */
 abstract class HttpRequestDecodingState extends DecodingStateMachine {
     //private static final Logger LOG = LoggerFactory.getLogger(HttpRequestDecodingState.class);
-	private final static MyLog LOG = MyLog.getLog(HttpRequestDecodingState.class);
+	private static final MyLog LOG = MyLog.getLog(HttpRequestDecodingState.class);
     /**
      * The request we are building
      */
