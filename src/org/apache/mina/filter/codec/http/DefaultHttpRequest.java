@@ -407,8 +407,7 @@ public class DefaultHttpRequest extends DefaultHttpMessage implements MutableHtt
                 if (expiry >= 0) {
                     if (version == 0) {
                         String expires = expiry == 0 ? EXPIRED_DATE
-                                : getFormattedExpiry(System.currentTimeMillis()
-                                        + 1000 * expiry);
+                            : getFormattedExpiry(System.currentTimeMillis()+ 1000 * expiry);
                         buf.append("; Expires=");
                         buf.append(expires);
                     } else {

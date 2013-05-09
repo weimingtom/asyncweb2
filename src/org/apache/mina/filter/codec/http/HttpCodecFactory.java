@@ -32,10 +32,8 @@ import org.apache.mina.filter.codec.ProtocolEncoder;
  * @version $Rev$, $Date$
  */
 public class HttpCodecFactory implements ProtocolCodecFactory {
-
     public HttpCodecFactory() {
     }
-
     public ProtocolEncoder getEncoder(IoSession session) throws Exception {
         if (session.getService() instanceof IoAcceptor) {
             return new HttpResponseEncoder();
@@ -43,7 +41,6 @@ public class HttpCodecFactory implements ProtocolCodecFactory {
             return new HttpRequestEncoder();
         }
     }
-
     public ProtocolDecoder getDecoder(IoSession session) throws Exception {
         if (session.getService() instanceof IoAcceptor) {
             return new HttpRequestDecoder();
