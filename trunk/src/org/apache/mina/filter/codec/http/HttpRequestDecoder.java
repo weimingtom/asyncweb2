@@ -30,16 +30,29 @@ import org.apache.mina.filter.codec.statemachine.DecodingStateProtocolDecoder;
  * @version $Rev$, $Date$
  */
 public class HttpRequestDecoder extends DecodingStateProtocolDecoder {
-    public HttpRequestDecoder() {
-        super(new HttpRequestDecodingState() {
-            @Override
-            protected DecodingState finishDecode(List<Object> childProducts,
-                    ProtocolDecoderOutput out) throws Exception {
-                for (Object m: childProducts) {
-                    out.write(m);
-                }
-                return null;
+//    public HttpRequestDecoder() {
+//        super(new HttpRequestDecodingState() {
+//            @Override
+//            protected DecodingState finishDecode(List<Object> childProducts,
+//                    ProtocolDecoderOutput out) throws Exception {
+//                for (Object m: childProducts) {
+//                    out.write(m);
+//                }
+//                return null;
+//            }
+//        });
+//    }
+	public HttpRequestDecoder() {
+		super(new HttpRequestDecodingState2());
+	}
+    public static class HttpRequestDecodingState2 extends HttpRequestDecodingState{
+    	@Override
+        protected DecodingState finishDecode(List<Object> childProducts,
+                ProtocolDecoderOutput out) throws Exception {
+            for (Object m: childProducts) {
+                out.write(m);
             }
-        });
+            return null;
+        }
     }
 }
