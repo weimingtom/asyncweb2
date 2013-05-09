@@ -44,6 +44,8 @@ import org.apache.mina.filter.codec.statemachine.LinearWhitespaceSkippingState;
  */
 abstract class HttpHeaderDecodingState extends DecodingStateMachine {
 
+	private boolean finish = false;// yinshu 2013.4.26 修改福建http报文头和报文体中间的2个回车换行符变成了1个的问题
+	
     private final CharsetDecoder asciiDecoder =
         HttpCodecUtils.US_ASCII_CHARSET.newDecoder();
     private final CharsetDecoder defaultDecoder =
@@ -91,6 +93,16 @@ abstract class HttpHeaderDecodingState extends DecodingStateMachine {
 	            lastHeaderName = product.getString(asciiDecoder);
 	            return AFTER_READ_HEADER_NAME;
 	        }
+	        
+	        @Override
+			public DecodingState finishDecode(ProtocolDecoderOutput out) throws Exception {
+				// yinshu 2013.4.26 修改福建http报文头和报文体中间的2个回车换行符变成了1个的问题，为循环定义出口
+				if (finish){
+					return null;
+				}
+				finish = true;
+				return super.finishDecode(out);
+			}
 	    };
 
     private final DecodingState AFTER_READ_HEADER_NAME = new LinearWhitespaceSkippingState() {
