@@ -49,6 +49,7 @@ public class HttpResponseEncoder implements ProtocolEncoder {
 
         buffer.flip();
         out.write(buffer);
+        out.flush();
     }
 
     public void dispose(IoSession session) throws Exception {
