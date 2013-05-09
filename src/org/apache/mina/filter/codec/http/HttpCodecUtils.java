@@ -39,12 +39,19 @@ import com.bs3.utils.MyLog;
 class HttpCodecUtils {
 	//private static final Logger LOG = LoggerFactory.getLogger(HttpCodecUtils.class);
 	private static final MyLog LOG = MyLog.getLog(HttpCodecUtils.class);
-    static final String DEFAULT_CHARSET_NAME = "UTF-8";
-    static final Charset DEFAULT_CHARSET = Charset.forName(DEFAULT_CHARSET_NAME);
-    static final String US_ASCII_CHARSET_NAME = "US-ASCII";
-    static final Charset US_ASCII_CHARSET = Charset.forName(US_ASCII_CHARSET_NAME);
+    //---------
+    static final String 	DEFAULT_CHARSET_NAME = "UTF-8";
+    static final Charset 	DEFAULT_CHARSET = Charset.forName(DEFAULT_CHARSET_NAME);
+    //---------
+    static final String 	GBK_CHARSET_NAME = "GBK";
+    static final Charset 	GBK_CHARSET = Charset.forName(GBK_CHARSET_NAME);
+    static final String 	UTF8_CHARSET_NAME = "UTF-8";
+    static final Charset 	UTF8_CHARSET = Charset.forName(UTF8_CHARSET_NAME);
+    static final String 	US_ASCII_CHARSET_NAME = "US-ASCII";
+    static final Charset 	US_ASCII_CHARSET = Charset.forName(US_ASCII_CHARSET_NAME);
+    //---------
     static final String DEFAULT_TIME_ZONE_NAME = "GMT";
-
+    //---------
     /**
      * Bytes making up a <code>CR LF</code>
      */

@@ -4,7 +4,6 @@ set DST=F:\Work.Eclipse\asyncweb2\
 set DIR=src\org\apache\mina\filter\codec\http
 
 @REM	svn checkout https://asyncweb2.googlecode.com/svn/trunk/ asyncweb2 --username Nike.Lius@gmail.com
-
 @REM	svn co https://asyncweb2.googlecode.com/svn/trunk/ asyncweb2 --username Nike.Lius@gmail.com
 @REM	svn commit 
 
