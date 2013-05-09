@@ -75,5 +75,6 @@ public class HttpRequestEncoder extends ProtocolEncoderAdapter {
 
         buf.flip();
         out.write(buf);
+        out.flush();
     }
 }

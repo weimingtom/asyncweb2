@@ -3,6 +3,8 @@ http://wutaoo.javaeye.com/blog/373640 ÊµÏÖserverÓö×è¡£»ØÍ·Ñ§Ï°Ò»ÏÂnetty×Ô´øµÄÒ»¸
 http://amozon.javaeye.com/blog/322528 Mina2.0 example HttpServer
 ¡¾»¢.ÎŞÃû¡¿²ÂÏëmina2¿ÉÍ¨¹ıfilter-codec-nettyÊ¹ÓÃnettyµÄ½âÎöÆ÷¡£
 --------------------
+http://scholers.javaeye.com/blog/784336 2010-10-14 MINA2ÊÕ°üÖĞ¶ÔÕ³°üµÄ´¦Àí·½Ê½
+--------------------
 ĞÂµÄµØÖ·SVNµØÖ·
 http://trac-hg.assembla.com/scala-mina/browser/filter-codec-http/src/main/java/org/apache/mina/filter/codec/http?rev=31:9fe1c96b96dc
 http://trac-hg.assembla.com/scala-mina/browser
@@ -36,7 +38,6 @@ http://trac-hg.assembla.com/scala-mina/browser
     protected final Map<String, List<String>> headers = new TreeMap<String, List<String>>(HttpHeaderNameComparator.INSTANCE);
     protected final Set<Cookie> cookies = new TreeSet<Cookie>(CookieComparator.INSTANCE);
     protected transient IoBuffer content = IoBuffer.allocate(0);
-	
 --------------------
 £¨1£©»ñÈ¡¹ØÓÚ£ºasyncweb-common-0.9.0-SNAPSHOT.jar £¨½öÖ§³Ömina2.0.2-£©
 1£¬´Ó Play¿ò¼ÜÖĞ»ñÈ¡£¬
