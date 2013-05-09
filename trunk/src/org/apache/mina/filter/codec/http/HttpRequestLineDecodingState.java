@@ -30,6 +30,8 @@ import org.apache.mina.filter.codec.statemachine.DecodingState;
 import org.apache.mina.filter.codec.statemachine.DecodingStateMachine;
 import org.apache.mina.filter.codec.statemachine.LinearWhitespaceSkippingState;
 
+import com.bs3.utils.MyLog;
+
 /**
  * Decodes an HTTP request line - populating an associated <code>Request</code>
  * This decoder expects the following format:
@@ -41,11 +43,10 @@ import org.apache.mina.filter.codec.statemachine.LinearWhitespaceSkippingState;
  * @version $Rev$, $Date$
  */
 abstract class HttpRequestLineDecodingState extends DecodingStateMachine {
+	private static final MyLog _log = MyLog.getLog(HttpRequestLineDecodingState.class);
 
-    private final CharsetDecoder asciiDecoder = 
-        HttpCodecUtils.US_ASCII_CHARSET.newDecoder();
-    private final CharsetDecoder defaultDecoder = 
-        HttpCodecUtils.DEFAULT_CHARSET.newDecoder();
+    private final CharsetDecoder asciiDecoder = HttpCodecUtils.US_ASCII_CHARSET.newDecoder();
+    private final CharsetDecoder defaultDecoder = HttpCodecUtils.DEFAULT_CHARSET.newDecoder();
 
     @Override
     protected DecodingState init() throws Exception {
@@ -77,10 +78,17 @@ abstract class HttpRequestLineDecodingState extends DecodingStateMachine {
 
     private final DecodingState READ_REQUEST_URI = new ConsumeToLinearWhitespaceDecodingState() {
         @Override
-        protected DecodingState finishDecode(IoBuffer product,
-                ProtocolDecoderOutput out) throws Exception {
-            out.write(new URI(product.getString(defaultDecoder)));
-            return AFTER_READ_REQUEST_URI;
+        protected DecodingState finishDecode(IoBuffer product,ProtocolDecoderOutput out) throws Exception {
+            //out.write(new URI(product.getString(defaultDecoder)));
+        	String	str = product.getString(defaultDecoder);
+        	try {
+	        	URI	uri = new URI(str);
+	        	out.write(uri);
+	        	return AFTER_READ_REQUEST_URI;
+        	}catch(Exception e) {
+	        	_log.error(e, "E finishDecode() uri=%s", str);
+	        	throw e;
+        	}
         }
     };
 
