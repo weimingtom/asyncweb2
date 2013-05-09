@@ -1,4 +1,12 @@
 --------------------
+http://wutaoo.javaeye.com/blog/373640 实现server遇阻。回头学习一下netty自带的一个http server实现。
+http://amozon.javaeye.com/blog/322528 Mina2.0 example HttpServer
+【虎.无名】猜想mina2可通过filter-codec-netty使用netty的解析器。
+--------------------
+新的地址SVN地址
+http://trac-hg.assembla.com/scala-mina/browser/filter-codec-http/src/main/java/org/apache/mina/filter/codec/http?rev=31:9fe1c96b96dc
+http://trac-hg.assembla.com/scala-mina/browser
+--------------------
 （1）src_asyncweb_apache_mina1_0.rar	反编译asyncweb-common-0.9.0-SNAPSHOT.jar（仅支持mina2.0m2）
 （2）src_asyncweb_apache_mina1_1.rar	修改 org\apache\asyncweb\common 以便支持mina2.0m3+ (未完，在HttpVersion时处理Enum失败) 
 （3）src_asyncweb_apache_mina2_0.rar	获取 org\apache\mina\filter\codec\http

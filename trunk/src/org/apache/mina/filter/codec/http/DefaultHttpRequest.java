@@ -47,9 +47,7 @@ import org.apache.mina.core.buffer.IoBuffer;
  * @author The Apache MINA Project (dev@mina.apache.org)
  * @version $Rev$, $Date$
  */
-public class DefaultHttpRequest extends DefaultHttpMessage implements
-        MutableHttpRequest {
-
+public class DefaultHttpRequest extends DefaultHttpMessage implements MutableHttpRequest {
     private static final long serialVersionUID = 3044997961372568928L;
 
     private HttpMethod method = HttpMethod.GET;
