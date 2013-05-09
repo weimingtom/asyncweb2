@@ -35,8 +35,9 @@ import org.apache.mina.filter.codec.ProtocolEncoderOutput;
  */
 public class HttpRequestEncoder extends ProtocolEncoderAdapter {
 
-    private final CharsetEncoder asciiEncoder =
-        HttpCodecUtils.US_ASCII_CHARSET.newEncoder();
+    //private final CharsetEncoder asciiEncoder = HttpCodecUtils.US_ASCII_CHARSET.newEncoder();
+    //private final CharsetEncoder asciiEncoder = HttpCodecUtils.DEFAULT_CHARSET.newEncoder();//UTF8
+	private final CharsetEncoder asciiEncoder = HttpCodecUtils.UTF8_CHARSET.newEncoder();//UTF8
 
     public HttpRequestEncoder() {
     }
@@ -61,6 +62,8 @@ public class HttpRequestEncoder extends ProtocolEncoderAdapter {
         buf.putString(uri.getPath(), asciiEncoder);
         String query = uri.getQuery();
         if (query != null && query.length() > 0) {
+            System.err.println("HttpRequestEncoder# "+query);
+            System.err.println("HttpRequestEncoder# "+asciiEncoder);
             buf.put((byte) '?');
             buf.putString(query, asciiEncoder);
         }
